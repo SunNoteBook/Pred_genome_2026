@@ -8,7 +8,8 @@ orthologs_2sp <- load_orthologs(orthologs_table = "~/Desktop/Ongoing/Pred/Nigon/
                                             "~/Desktop/Ongoing/Pred/gfffiles/caenorhabditis_elegans.WBPS19.gene.bed"
                                ))
 Nigonindex = read.table("~/Desktop/Ongoing/Pred/Nigon/newInputfromgithub/elegans_NigonOnly_reformed.genelist")
-orthologs_2sp_extend <- orthologs_2sp %>% left_join(Nigonindex[,c(1,3)], by = c("sp1.ID" = "V1"))
+orthologs_2sp_unique <- orthologs_2sp %>%distinct(sp2.ID, .keep_all = TRUE)
+orthologs_2sp_extend <- orthologs_2sp_unique %>% left_join(Nigonindex[,c(1,3)], by = c("sp1.ID" = "V1"))
 colnames(orthologs_2sp_extend)[ncol(orthologs_2sp_extend)] <- "Nigon"
 chr <- read.table("~/Desktop/Ongoing/Pred/fastafiles/PREV1.genome.v1.0.chr", header=FALSE)
 colnames(chr) <- c("chr","chr_length")
