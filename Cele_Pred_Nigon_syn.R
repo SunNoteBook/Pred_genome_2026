@@ -3,11 +3,11 @@ library(macrosyntR)
 library(tidyverse)
 
 
-orthologs_2sp <- load_orthologs(orthologs_table = "~/Desktop/Ongoing/Pred/elegans_Pred_5375genes/elegans_NigonOnly_reformed.genelist2",
+orthologs_2sp <- load_orthologs(orthologs_table = "~/Desktop/Ongoing/Pred/Nigon/newInputfromgithub/elegans_NigonOnly_reformed.genelist2",
                                bedfiles = c("~/Desktop/Ongoing/Pred/gfffiles/PREV1.genes.v1.1.gene.bed",
                                             "~/Desktop/Ongoing/Pred/gfffiles/caenorhabditis_elegans.WBPS19.gene.bed"
                                ))
-Nigonindex = read.table("~/Desktop/Ongoing/Pred/elegans_Pred_5375genes/elegans_NigonOnly_reformed.genelist")
+Nigonindex = read.table("~/Desktop/Ongoing/Pred/Nigon/newInputfromgithub/elegans_NigonOnly_reformed.genelist")
 orthologs_2sp_extend <- orthologs_2sp %>% left_join(Nigonindex[,c(1,3)], by = c("sp1.ID" = "V1"))
 colnames(orthologs_2sp_extend)[ncol(orthologs_2sp_extend)] <- "Nigon"
 chr <- read.table("~/Desktop/Ongoing/Pred/fastafiles/PREV1.genome.v1.0.chr", header=FALSE)
